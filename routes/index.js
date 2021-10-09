@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const todoLists = [ 
+let todoLists = [ 
     
         {
             itemId: 1,
@@ -19,7 +19,7 @@ const todoLists = [
 
         {
             itemId: 3,
-            titel: "three",
+            title: "three",
             content: "3rd item in todo-list",
             dateLastEdited: 123
         }
@@ -27,7 +27,8 @@ const todoLists = [
 
 /* GET all todo-lists */
 router.get('/api', (req, res) => {
-  res.json(todoLists)
+    res.statusCode = 200;
+  res.json(todoLists);
 });
 
 /*GET a specific todo-list */
@@ -38,13 +39,35 @@ router.get('/api/:id', function(req, res) {
     })
     if (!listId) {
         res.statusCode = 404;
-        res.statusMessage = 'Not Found'
         res.end('Not found')
     } else {
         res.json(listId)
     }
 
 })
+
+/* PUT modify a specific todo-list */
+router.put('/api/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    let list = todoLists.find( c => c.itemId === id);
+    //if no list with given id found:
+    if (!list) {
+        res.statusCode = 404;
+        res.end('Not found');
+    //modify the list with given id, return modified item
+    } else {
+        let editedListItem = todoLists[id -1];
+        const updatedTitle = req.body.title;
+        const updatedContent = req.body.content;
+        const updatedDateLastEdited = 567 // todo correct date
+
+        editedListItem.title = updatedTitle;
+        editedListItem.content = updatedContent;
+        editedListItem.dateLastEdited = updatedDateLastEdited;
+
+        res.json(editedListItem);
+    }
+} )
 
 /*POST, create a new todo-list*/ //expects json in the res body {"name": "soup", "description": "delicious asian fish soup"}
 router.post('/api/', (req, res) => {
@@ -58,9 +81,22 @@ router.post('/api/', (req, res) => {
     
 })
 
-/* router.delete('/api/:id', (req, res) => {
-    res.statusCode = 200;
-    res.json(todoLists);
-}) */
+/*DELETE a specific todo-list */
+router.delete('/api/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const list = todoLists.find( c => c.itemId === id);
+    //if no list with given id found:
+    if (!list) {
+        res.status = 404;
+        res.end('end 1');
+    //remove the list with given id, return deleted item
+    } else {
+        const index = todoLists.indexOf(list);
+        todoLists.splice(index, 1);
+        res.statusCode = 200;
+        //return the deleted item
+        res.json(list);
+    }
+})
 
 module.exports = router;
