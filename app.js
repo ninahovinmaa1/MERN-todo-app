@@ -6,18 +6,23 @@ const mongoose = require('mongoose');
 const TodoList = require('./models/todoList');
 var indexRouter = require('./routes/index');
 
-mongoose.connect('mongodb://localhost:27017/todoListApp');
-const db = mongoose.connection;
-db.on('error', (error) => console.log(error));
-db.once('open', () => console.log('Connected to Database'));
+//db-configuration
+const url = 'mongodb://localhost:27017/todoListApp';
+const connect = mongoose.connect(url);
+
+connect.then((db) => {
+  console.log('Connected correctly to server')
+}, (err) => { console.log(err); });
 
 var app = express();
 
+//middlewares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+//routes
 app.use('/', indexRouter);
 
 module.exports = app;
