@@ -42,26 +42,25 @@ router.get('/api/:id', (req, res) => {
 
 /* PUT modify a specific todo-list */
 router.put('/api/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    let list = todoLists.find( c => c.itemId === id);
-    //if no list with given id found:
-    if (!list) {
-        res.statusCode = 404;
-        res.end('Not found');
-    //modify the list with given id, return modified item
-    } else {
-        let editedListItem = todoLists[id -1];
-        const updatedTitle = req.body.title;
-        const updatedContent = req.body.content;
-        const updatedDateLastEdited = 567 // todo correct date
-
-        editedListItem.title = updatedTitle;
-        editedListItem.content = updatedContent;
-        editedListItem.dateLastEdited = updatedDateLastEdited;
-
-        res.json(editedListItem);
-    }
-} )
+    const id = req.params.id;
+    const { title, content, dateLastEdited } = req.body;
+    console.log(id);
+    console.log(req.body);
+    TodoLists.findByIdAndUpdate(
+        id,
+        {
+            title,
+            content,
+            dateLastEdited
+        },
+        {new: true}
+    )
+    .then((list) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(list)
+    })
+})
 
 /*POST, create a new todo-list*/ //expects json in the res body {"name": "soup", "description": "delicious asian fish soup"}
 router.post('/api/', (req, res) => {
