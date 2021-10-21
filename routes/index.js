@@ -1,50 +1,43 @@
 var express = require('express');
+const mongoose = require('mongoose');
 var router = express.Router();
-var TodoList = require('../models/todoList');
 
-let todoLists = [ 
+var TodoLists = require('../models/todoList');
+
+/* let todoLists = [ 
     
         {
-            itemId: 1,
             title: "one",
             content: "1st item in todo-list",
             dateLastEdited: 123
         },
     
         {
-            itemId: 2,
             title: "two",
             content: "2nd item in todo-list",
             dateLastEdited: 123
-        },
-
-        {
-            itemId: 3,
-            title: "three",
-            content: "3rd item in todo-list",
-            dateLastEdited: 123
         }
-]
+] */
 
 /* GET all todo-lists */
 router.get('/api', (req, res) => {
-    res.statusCode = 200;
-  res.json(todoLists);
+    TodoLists.find({})
+    .then((todoLists) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(todoLists)
+    })
 });
 
 /*GET a specific todo-list */
-router.get('/api/:id', function(req, res) {
+router.get('/api/:id', (req, res) => {
     const id = req.params.id;
-    const listId = todoLists.find((list) => {
-        return list.itemId == id; 
+    TodoLists.findById(id)
+    .then((list) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(list)
     })
-    if (!listId) {
-        res.statusCode = 404;
-        res.end('Not found')
-    } else {
-        res.json(listId)
-    }
-
 })
 
 /* PUT modify a specific todo-list */
@@ -89,7 +82,6 @@ router.delete('/api/:id', (req, res) => {
     //if no list with given id found:
     if (!list) {
         res.status = 404;
-        res.end('end 1');
     //remove the list with given id, return deleted item
     } else {
         const index = todoLists.indexOf(list);
