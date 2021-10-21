@@ -61,16 +61,15 @@ router.put('/api/:id', (req, res) => {
     })
 })
 
-/*POST, create a new todo-list*/ //expects json in the res body {"name": "soup", "description": "delicious asian fish soup"}
+/*POST, create a new todo-list*/ //expects json in the req.body
 router.post('/api/', (req, res) => {
-    if (!req.body) {
-       res.statusCode = 400; 
-       return;
-    }
-    res.statusCode = 200;
-    todoLists.push(req.body);
-    res.json(todoLists);
-    
+    const createdList = req.body;
+    TodoLists.create(createdList)
+    .then((list) => {
+        res.statusCode = 201;
+        res.setHeader('Content-Type', 'application/json');
+        res.redirect(200, "/api");
+    })    
 })
 
 /*DELETE a specific todo-list */
