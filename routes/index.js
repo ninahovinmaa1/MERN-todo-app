@@ -44,8 +44,7 @@ router.get('/api/:id', (req, res) => {
 router.put('/api/:id', (req, res) => {
     const id = req.params.id;
     const { title, content, dateLastEdited } = req.body;
-    console.log(id);
-    console.log(req.body);
+
     TodoLists.findByIdAndUpdate(
         id,
         {
