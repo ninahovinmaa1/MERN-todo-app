@@ -74,19 +74,12 @@ router.post('/api/', (req, res) => {
 
 /*DELETE a specific todo-list */
 router.delete('/api/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const list = todoLists.find( c => c.itemId === id);
-    //if no list with given id found:
-    if (!list) {
-        res.status = 404;
-    //remove the list with given id, return deleted item
-    } else {
-        const index = todoLists.indexOf(list);
-        todoLists.splice(index, 1);
+    TodoLists.findByIdAndRemove(req.params.id)
+    .then((list) => {
         res.statusCode = 200;
-        //return the deleted item
+        res.setHeader('Content-Type', 'application/json')
         res.json(list);
-    }
+    })
 })
 
 module.exports = router;
