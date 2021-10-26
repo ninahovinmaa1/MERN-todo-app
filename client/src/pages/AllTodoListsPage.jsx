@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import TodoList from '../components/TodoList';
 
 export default function AllTodoListsPage() {
 
@@ -20,8 +21,7 @@ export default function AllTodoListsPage() {
       { data && data.map((todoList, index) => {
         return (
           <>
-          <h3>{todoList.title}</h3>
-          <p>{todoList.content}</p>
+          <TodoList title={todoList.title} body={todoList.content}/>
           </>
         )
       })}
