@@ -6,7 +6,7 @@ import DetailedListPage from './pages/DetailedListPage';
 function App() {
   return (
 
-    <div className="App">
+    <div className="container">
         <Switch>
             <Route path="/:id"><DetailedListPage/></Route>
             <Route path="/"><AllTodoListsPage/></Route>
