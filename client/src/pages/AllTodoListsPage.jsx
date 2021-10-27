@@ -21,7 +21,7 @@ export default function AllTodoListsPage() {
       { data && data.map((todoList, index) => {
         return (
           <>
-          <TodoList title={todoList.title} body={todoList.content}/>
+            <TodoList key={index} {...todoList}/>
           </>
         )
       })}
