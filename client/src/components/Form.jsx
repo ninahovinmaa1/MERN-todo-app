@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-export default function Form() {
+export default function Form(props) {
+  const [inputTitle, setInputTitle] = useState("");
   
   function handleSubmit(e) {
-  e.preventDefault();
-  alert('Hello, world!');
+    e.preventDefault();
+    props.addTask(inputTitle);
+    setInputTitle("");
 }
+
+  function handleChange(e) {
+    setInputTitle(e.target.value);
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -18,14 +24,16 @@ export default function Form() {
         type="text"
         className="input input__lg"
         name="title"
-        value="title"
+        placeholder="task title"
+        value={inputTitle}
+        onChange={handleChange}
       />
-      <input
+      {/* <input
         type="text"
         className="input input__lg"
         name="content"
-        value="content"
-      />
+        value="taskcontent"
+      /> */}
       <button type="submit" className="btn btn-primary">
         Add
       </button>

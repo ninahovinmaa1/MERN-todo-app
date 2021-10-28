@@ -17,9 +17,13 @@ export default function AllTodoListsPage() {
     fetchData()
   }, [])
 
+  const addTask = (title) => {
+    console.log(title)
+  }
+
   return (
     <div>
-      <Form />
+      <Form addTask={addTask}/>
       { data && data.map((todoList, index) => {
         return (
           <>

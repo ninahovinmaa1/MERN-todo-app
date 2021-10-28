@@ -23,15 +23,15 @@ export default function DetailedListPage(props) {
   }
 
   //DELETE a single todoList
-  const deleteData = () => {
+  function deleteData() {
     fetch(url, {
       method: 'DELETE',
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
       }
-    }) 
-    .then(response => response.json())
-    .then(data => alert(`Removed todo-list:${data.title}`)) // alert that todo-list is removed
+    })
+      .then(response => response.json())
+      .then(data => alert(`Removed todo-list:${data.title}`)); // alert that todo-list is removed
   }
 
   return (
