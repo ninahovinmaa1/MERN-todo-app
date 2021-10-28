@@ -8,7 +8,7 @@ function App() {
 
     <div className="container">
         <Switch>
-            <Route path="/:id"><DetailedListPage/></Route>
+            <Route path="/:id" component={DetailedListPage}/>
             <Route path="/"><AllTodoListsPage/></Route>
         </Switch>
     </div>
