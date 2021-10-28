@@ -26,8 +26,7 @@ export default function DetailedListPage(props) {
       }
     }) 
     .then(response => response.json())
-    .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
-    .catch(err => console.log(err)) // Do something with the error
+    .then(data => alert(`Removed todo-list:${data.title}`)) // alert that todo-list is removed
   }
 
   return (
@@ -37,7 +36,7 @@ export default function DetailedListPage(props) {
         <TodoList {...data}/>
       }
       <button>Edit</button>  
-      <button onClick={deleteData()}>Delete</button>
+      <button onClick={deleteData}>Delete</button>
     </section>
   )
 }
