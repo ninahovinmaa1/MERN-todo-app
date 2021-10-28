@@ -17,6 +17,11 @@ export default function DetailedListPage(props) {
     fetchData()
   }, [])
 
+  //EDIT a single todolist
+  const editData = () => {
+    alert('data edited')
+  }
+
   //DELETE a single todoList
   const deleteData = () => {
     fetch(url, {
@@ -35,7 +40,7 @@ export default function DetailedListPage(props) {
       {data && 
         <TodoList {...data}/>
       }
-      <button>Edit</button>  
+      <button onClick={editData}>Edit</button>  
       <button onClick={deleteData}>Delete</button>
     </section>
   )
