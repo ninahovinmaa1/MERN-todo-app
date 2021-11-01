@@ -43,14 +43,13 @@ router.get('/api/:id', (req, res) => {
 /* PUT modify a specific todo-list */
 router.put('/api/:id', (req, res) => {
     const id = req.params.id;
-    const { title, content, dateLastEdited } = req.body;
+    const { title, content } = req.body;
 
     TodoLists.findByIdAndUpdate(
         id,
         {
             title,
-            content,
-            dateLastEdited
+            content
         },
         {new: true}
     )

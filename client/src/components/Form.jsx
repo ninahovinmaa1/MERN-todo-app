@@ -12,8 +12,6 @@ export default function Form() {
     e.preventDefault();
     
     const todoList = { title, content }
-    
-    console.log(todoList)
 
     fetch("http://localhost:3000/api/", {
       method: "POST",

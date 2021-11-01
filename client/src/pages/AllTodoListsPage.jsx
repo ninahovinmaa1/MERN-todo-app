@@ -17,10 +17,6 @@ export default function AllTodoListsPage() {
     fetchData()
   }, [])
 
-  const addTask = (title, content) => {
-    console.log(title, content)
-  }
-
   return (
     <div>
       <Form/>
