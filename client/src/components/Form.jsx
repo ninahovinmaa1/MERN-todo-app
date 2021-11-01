@@ -6,7 +6,7 @@ export default function Form() {
   const [content, setContent] = useState("");
   const history = useHistory();
   
-
+  //Create a new todoList on submit
   function handleSubmit(e) {
     //prevent page from refreshing
     e.preventDefault();
@@ -17,7 +17,7 @@ export default function Form() {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(todoList) 
-    }).then(() => history.push('/'))
+    })
 }
 
   return (
