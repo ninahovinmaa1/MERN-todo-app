@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function Form() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const history = useHistory();
   
 
   function handleSubmit(e) {
@@ -17,7 +19,7 @@ export default function Form() {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(todoList) 
-    }).then(() => console.log("item created"))
+    }).then(() => history.push('/'))
 }
 
   return (
