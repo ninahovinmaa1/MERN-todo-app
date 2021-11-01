@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 
-export default function Form(props) {
-  const [inputTitle, setInputTitle] = useState("");
+export default function Form() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   
-  function handleSubmit(e) {
-    e.preventDefault();
-    props.addTask(inputTitle);
-    setInputTitle("");
-}
 
-  function handleChange(e) {
-    setInputTitle(e.target.value);
-  }
+  function handleSubmit(e) {
+    //prevent page from refreshing
+    e.preventDefault();
+    
+    const todoList = { title, content }
+    
+    console.log(todoList)
+
+    fetch("http://localhost:3000/api/", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(todoList) 
+    }).then(() => console.log("item created"))
+}
 
   return (
     <form onSubmit={handleSubmit}>
@@ -25,18 +32,18 @@ export default function Form(props) {
         className="input input__lg"
         name="title"
         placeholder="task title"
-        value={inputTitle}
-        onChange={handleChange}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
-      {/* <input
+      <input
         type="text"
         className="input input__lg"
         name="content"
-        value="taskcontent"
-      /> */}
-      <button type="submit" className="btn btn-primary">
-        Add
-      </button>
+        placeholder="task content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <button className="btn btn-primary">Add List</button>
     </form>
   )
 }
