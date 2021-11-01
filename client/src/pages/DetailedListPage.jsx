@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import TodoList from '../components/TodoList';
 
 export default function DetailedListPage(props) {
@@ -21,17 +21,13 @@ export default function DetailedListPage(props) {
     fetchData()
   }, [])
 
-  //EDIT a single todolist
-  const editData = () => {
-    alert('data edited')
-  }
 
   //DELETE a single todoList
   function deleteData() {
     fetch(url, {
       method: 'DELETE',
       headers: {
-        'Content-type': 'application/json; charset=UTF-8'
+        'Content-type': 'application/json'
       }
     })
       .then(response => response.json())
@@ -44,9 +40,9 @@ export default function DetailedListPage(props) {
       <h2>This is detailed list page</h2>
       {data && 
         <TodoList {...data}/>
-      }
-      <button onClick={editData}>Edit</button>  
-      <button onClick={deleteData}>Delete</button>
+      } 
+      <Link to={`/edit/${id}`} className="btn btn-primary">Edit</Link>
+      <button onClick={deleteData} className="btn btn-secondary">Delete</button>
     </section>
   )
 }
