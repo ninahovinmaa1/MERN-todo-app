@@ -11,7 +11,10 @@ var indexRouter = require('./routes/index');
 //db-configuration
 //const url = 'mongodb://localhost:27017/todoListApp';
 const uri = process.env.DB_URI;
-const connect = mongoose.connect(uri);
+const connect = mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 connect.then((db) => {
   console.log('Connected correctly to server')
