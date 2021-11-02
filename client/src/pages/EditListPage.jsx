@@ -7,7 +7,7 @@ export default function EditListPage(props) {
   const [content, setContent] = useState("");
   const history = useHistory();
   const id = props.match.params.id;
-  const url = `http://localhost:3000/api/${id}`;
+  const url = `https://api-todo-app-be3.herokuapp.com/api/${id}`;
 
   //GET oldData from API for a single todoList
   const fetchData = () => {
@@ -30,7 +30,7 @@ export default function EditListPage(props) {
     
     console.log(updatedTodoList)
 
-    fetch(`http://localhost:3000/api/${id}`, {
+    fetch(`https://api-todo-app-be3.herokuapp.com/api/${id}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(updatedTodoList) 

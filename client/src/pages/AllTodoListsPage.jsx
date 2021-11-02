@@ -7,7 +7,7 @@ export default function AllTodoListsPage() {
   const [data, setData] = useState(null);
 
   const fetchData = () => {
-    const url = "http://localhost:3000/api/"
+    const url = "https://api-todo-app-be3.herokuapp.com/api"
     fetch(url)
       .then(res => res.json())
       .then(data => setData(data))

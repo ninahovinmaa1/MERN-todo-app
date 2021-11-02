@@ -7,7 +7,7 @@ export default function DetailedListPage(props) {
   const history = useHistory();
   const id = props.match.params.id;
 
-  const url = `http://localhost:3000/api/${id}`;
+  const url = `https://api-todo-app-be3.herokuapp.com/api/${id}`;
 
   //GET data from API for a single todoList
   const fetchData = () => {

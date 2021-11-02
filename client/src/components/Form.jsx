@@ -11,7 +11,7 @@ export default function Form() {
     
     const todoList = { title, content }
 
-    fetch("http://localhost:3000/api/", {
+    fetch("https://api-todo-app-be3.herokuapp.com/api/", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(todoList) 
