@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const dotenv = require("dotenv");
 dotenv.config();
 const TodoList = require('./models/todoList');
-var indexRouter = require('./routes/index');
+
 
 //db-configuration
 //const url = 'mongodb://localhost:27017/todoListApp';
@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //routes
+var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
 module.exports = app;
