@@ -9,7 +9,6 @@ export default function DetailedListPage(props) {
 
   const url = `http://localhost:3000/api/${id}`;
 
-
   //GET data from API for a single todoList
   const fetchData = () => {
     fetch(url)
@@ -31,7 +30,7 @@ export default function DetailedListPage(props) {
       }
     })
       .then(response => response.json())
-      .then(data => alert(`Removed todo-list:${data.title}`)) // alert that todo-list is removed
+      .then(data => alert(`Removed todo-list:${data.title}`))
       .then(() => history.push('/'));
   }
 

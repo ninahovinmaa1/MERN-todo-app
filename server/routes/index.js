@@ -4,21 +4,6 @@ var router = express.Router();
 
 var TodoLists = require('../models/todoList');
 
-/* let todoLists = [ 
-    
-        {
-            title: "one",
-            content: "1st item in todo-list",
-            dateLastEdited: 123
-        },
-    
-        {
-            title: "two",
-            content: "2nd item in todo-list",
-            dateLastEdited: 123
-        }
-] */
-
 /* GET all todo-lists */
 router.get('/api', (req, res) => {
     TodoLists.find({})
