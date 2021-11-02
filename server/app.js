@@ -4,12 +4,14 @@ var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+require("dotenv").config();
 const TodoList = require('./models/todoList');
 var indexRouter = require('./routes/index');
 
 //db-configuration
-const url = 'mongodb://localhost:27017/todoListApp';
-const connect = mongoose.connect(url);
+//const url = 'mongodb://localhost:27017/todoListApp';
+const uri = process.env.DB_URI;
+const connect = mongoose.connect(uri);
 
 connect.then((db) => {
   console.log('Connected correctly to server')
