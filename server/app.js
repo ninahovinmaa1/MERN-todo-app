@@ -11,7 +11,8 @@ const TodoList = require('./models/todoList');
 
 //db-configuration
 //const url = 'mongodb://localhost:27017/todoListApp';
-const uri = process.env.DB_URI;
+//const uri = process.env.DB_URI;
+const uri = "mongodb+srv://new-user-123:12345@cluster0.aknhk.mongodb.net/todoListApp?retryWrites=true&w=majority"
 const connect = mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
