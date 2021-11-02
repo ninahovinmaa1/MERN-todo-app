@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 export default function Form() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const history = useHistory();
   
   //Create a new todoList on submit
   function handleSubmit(e) {
