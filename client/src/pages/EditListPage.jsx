@@ -15,6 +15,8 @@ export default function EditListPage(props) {
       .then(res => res.json())
       .then(oldData => {
         setOldData(oldData)
+        setTitle(oldData.title)
+        setContent(oldData.content)
       })
   };
 
@@ -27,8 +29,6 @@ export default function EditListPage(props) {
     e.preventDefault();
     
     const updatedTodoList = { title, content }
-    
-    console.log(updatedTodoList)
 
     fetch(`https://api-todo-app-be3.herokuapp.com/api/${id}`, {
       method: "PUT",
@@ -47,26 +47,27 @@ export default function EditListPage(props) {
           Edit todo-list
         </label>
       </h2>
-      { oldData && 
-        <>
-          <input
-            type="text"
-            className="input input__lg"
-            name="title"
-            placeholder={oldData.title}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            className="input input__lg"
-            name="content"
-            placeholder={oldData.content}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-          <button className="btn btn-primary">Save changes</button>
-        </>
+      { !oldData ? <h3>Loading...</h3> :  
+          <>
+            <input
+              type="text"
+              className="input input__lg"
+              name="title"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value) 
+              }
+            />
+            <input
+              type="text"
+              className="input input__lg"
+              name="content"
+              placeholder="Content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+            <button className="btn btn-primary">Save changes</button>
+          </>
       }
     </form>
   )
