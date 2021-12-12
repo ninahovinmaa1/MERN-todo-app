@@ -16,6 +16,8 @@ export default function Form() {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(todoList) 
     })
+    .then(setTitle(''))
+    .then(setContent(''))
 }
 
   return (

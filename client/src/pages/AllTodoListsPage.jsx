@@ -15,7 +15,7 @@ export default function AllTodoListsPage() {
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [data])
 
   return (
     <div>
